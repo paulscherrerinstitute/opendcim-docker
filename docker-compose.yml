@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  db:
+    # network_mode: host
+    image: mariadb
+#    ports: 
+#      - "5432:5432"
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+      MARIADB_DATABASE: dcim
+      MARIADB_USER: dcim
+      MARIADB_PASSWORD: dcim
+
+  frontend:
+    image: psi/opendcim
+    ports: 
+      - "80:80"
