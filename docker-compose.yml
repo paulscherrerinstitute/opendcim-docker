@@ -4,8 +4,8 @@ services:
   db:
     # network_mode: host
     image: mariadb
-#    ports: 
-#      - "5432:5432"
+    ports: 
+     - "3306:3306"
     environment:
       MARIADB_ROOT_PASSWORD: example
       MARIADB_DATABASE: dcim
@@ -13,6 +13,17 @@ services:
       MARIADB_PASSWORD: dcim
 
   frontend:
-    image: psi/opendcim
+    # network_mode: host
+    image: leosala/opendcim:21.01
+    # user: "www-data:www-data"
     ports: 
-      - "80:80"
+      - "80:8080"
+    environment:
+      OPENDCIM_DB_HOST: db
+    volumes:
+      - ./data/drawings:/var/www/html/drawings
+      # - ./data/assets:/var/www/html/assets
+      - ./data/pictures:/var/www/html/pictures
+      # - /etc/pki/tls/certs/ca.crt:/etc/pki/tls/certs/ca.crt:ro
+      # - /etc/pki/tls/private/ca.key:/etc/pki/tls/private/ca.key:ro
+
